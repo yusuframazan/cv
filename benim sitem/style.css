@@ -23,11 +23,6 @@ h1, h2, h3 {
   border-radius: 50%;
   margin-top: 20px;
 }
-header h1 {
-    font-size: 2.5em;
-    color: #fff; /* Yazı rengini beyaz yapıyoruz */
-}
-
 
 /* Header */
 header {
@@ -39,6 +34,7 @@ header {
 
 header h1 {
   font-size: 2.5em;
+  color: #fff;
 }
 
 header p {
@@ -113,4 +109,53 @@ footer {
   text-align: center;
   padding: 20px 0;
   margin-top: 20px;
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2em; /* Başlık boyutunu küçült */
+  }
+
+  header p {
+    font-size: 1em; /* Paragraf boyutunu küçült */
+  }
+
+  .projects-grid {
+    flex-direction: column; /* Projeleri dikey hizala */
+  }
+
+  .project-card {
+    flex: 1 1 100%; /* Kartları tam genişlikte göster */
+  }
+
+  .container {
+    padding: 10px 0; /* Kenar boşluklarını küçült */
+  }
+
+  form input, form textarea {
+    padding: 10px; /* Mobilde rahat kullanım için uygun hale getir */
+  }
+
+  form button {
+    padding: 10px 15px; /* Buton boyutunu küçült */
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.8em; /* Daha küçük ekranlar için başlık */
+  }
+
+  .profile-img {
+    max-width: 150px; /* Profil resmini küçült */
+  }
+
+  .project-card {
+    padding: 15px; /* Kart içeriğini daralt */
+  }
+
+  footer {
+    font-size: 0.9em; /* Daha küçük font kullan */
+  }
 }
