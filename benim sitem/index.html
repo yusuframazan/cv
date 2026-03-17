@@ -1,94 +1,554 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Yusuf Ramazan Tarlabaşı'nın profesyonel CV'si ve projeleri">
-  <title>Yusuf Ramazan Tarlabaşı | Kişisel CV</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yusuf Ramazan Tarlabşı — IoT & Embedded Systems Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f0e;
+      --bg2: #131614;
+      --bg3: #1a1e1c;
+      --border: #252b28;
+      --accent: #4ade80;
+      --accent-dim: #1a3325;
+      --accent-glow: rgba(74, 222, 128, 0.10);
+      --text: #e8ede9;
+      --text-mid: #8fa395;
+      --text-dim: #4d6357;
+      --mono: 'DM Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(13,15,14,0.88); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 0.08em; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; color: var(--text-mid); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 2.5rem 5rem; max-width: 960px; margin: 0 auto;
+    }
+    .hero-tag {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--accent);
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-tag::before {
+      content: ''; display: inline-block; width: 6px; height: 6px;
+      background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+    h1 { font-size: clamp(2.8rem,8vw,6rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 0.4rem; }
+    h1 span { color: var(--accent); }
+    .hero-role { font-family: var(--mono); font-size: clamp(0.85rem,2vw,1rem); color: var(--text-mid); margin-bottom: 2rem; letter-spacing: 0.04em; }
+    .hero-desc { font-size: 1rem; color: var(--text-mid); max-width: 500px; line-height: 1.8; margin-bottom: 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.65rem 1.4rem; font-family: var(--mono); font-size: 0.78rem;
+      letter-spacing: 0.06em; text-decoration: none; border-radius: 4px;
+      transition: all 0.2s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--accent); color: #0d0f0e; font-weight: 500; }
+    .btn-primary:hover { background: #6ee7a0; box-shadow: 0 0 20px rgba(74,222,128,0.3); }
+    .btn-ghost { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-sm { padding: 0.35rem 0.8rem; font-size: 0.68rem; }
+
+    /* SECTIONS */
+    section { max-width: 960px; margin: 0 auto; padding: 5rem 2.5rem; border-top: 1px solid var(--border); }
+    .section-label { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    h2 { font-size: clamp(1.5rem,4vw,2.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+    .h-line { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .h-line::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* STATS */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 1.2rem; text-align: center; transition: border-color 0.2s; }
+    .stat-card:hover { border-color: var(--accent-dim); }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label { font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 0.4rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-text p { color: var(--text-mid); margin-bottom: 1rem; line-height: 1.8; font-size: 0.95rem; }
+    .about-edu { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
+    .edu-item { padding-bottom: 1.2rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--border); }
+    .edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .edu-year { font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+    .edu-school { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.15rem; }
+    .edu-dept { font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .exp-item { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; padding: 1.5rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; align-items: start; transition: border-color 0.2s; }
+    .exp-item:hover { border-color: var(--accent-dim); }
+    .exp-dot { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; margin-top: 0.45rem; flex-shrink: 0; box-shadow: 0 0 8px rgba(74,222,128,0.4); }
+    .exp-title { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .exp-company { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); margin-bottom: 0.5rem; }
+    .exp-desc { font-size: 0.85rem; color: var(--text-mid); line-height: 1.7; }
+
+    /* ACHIEVEMENTS */
+    .ach-list { display: flex; flex-direction: column; gap: 1rem; }
+    .ach-item { display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.2rem 1.5rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; transition: border-color 0.2s, background 0.2s; }
+    .ach-item:hover { border-color: var(--accent-dim); background: var(--bg3); }
+    .ach-badge { flex-shrink: 0; font-family: var(--mono); font-size: 0.62rem; font-weight: 500; padding: 0.22rem 0.55rem; border-radius: 3px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.15rem; }
+    .badge-gold { background: rgba(251,191,36,.12); color: #fbbf24; border: 1px solid rgba(251,191,36,.25); }
+    .badge-finalist { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(74,222,128,.2); }
+    .ach-title { font-size: 0.93rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+    .ach-sub { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); }
+
+    /* FILTER */
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+    .filter-btn { font-family: var(--mono); font-size: 0.7rem; padding: 0.4rem 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 100px; color: var(--text-mid); cursor: pointer; transition: all 0.2s; letter-spacing: 0.06em; }
+    .filter-btn:hover, .filter-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+    .project-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(74,222,128,0.08); }
+    .project-card.hidden { display: none; }
+    .project-thumb { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .project-body { padding: 1.3rem; display: flex; flex-direction: column; gap: 0.65rem; flex: 1; }
+    .project-cat { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .cat-iot { color: #38bdf8; }
+    .cat-robotik { color: #f472b6; }
+    .cat-web { color: #fb923c; }
+    .cat-ai { color: #a78bfa; }
+    .project-name { font-size: 0.92rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .project-desc { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); line-height: 1.6; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .tag { font-family: var(--mono); font-size: 0.58rem; padding: 0.18rem 0.45rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 3px; color: var(--text-dim); }
+    .project-links { display: flex; gap: 0.5rem; margin-top: 0.3rem; flex-wrap: wrap; }
+
+    .thumb-iot { background: linear-gradient(135deg, #0d1f2d 0%, #0a2a1a 100%); }
+    .thumb-robotik { background: linear-gradient(135deg, #1f0d2d 0%, #2a0a1a 100%); }
+    .thumb-web { background: linear-gradient(135deg, #1f1a0d 0%, #2a1a0a 100%); }
+    .thumb-ai { background: linear-gradient(135deg, #1a0d2d 0%, #0d1a2a 100%); }
+
+    /* SKILLS */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .skill-pill { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 100px; font-family: var(--mono); font-size: 0.73rem; color: var(--text-mid); transition: all 0.2s; }
+    .skill-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+    .skill-pill .dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; opacity: 0.6; }
+
+    /* GITHUB CONTRIB */
+    .github-stats { margin-top: 2.5rem; }
+    .contrib-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; text-align: center; }
+    .contrib-box img { max-width: 100%; border-radius: 6px; opacity: 0.9; }
+    .contrib-label { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* LINKS */
+    .links-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1rem; }
+    .link-card { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.2rem 1.4rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+    .link-card:hover { border-color: var(--accent); background: var(--accent-glow); transform: translateY(-2px); }
+    .link-type { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .link-label { font-size: 0.87rem; font-weight: 600; color: var(--text); }
+    .link-url { font-family: var(--mono); font-size: 0.63rem; color: var(--text-dim); word-break: break-all; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    .contact-info p { color: var(--text-mid); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 0.8rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+    .contact-item:hover { border-color: var(--accent); }
+    .contact-icon { font-size: 1rem; flex-shrink: 0; width: 1.5rem; text-align: center; }
+    .contact-type { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+    .contact-val { font-size: 0.85rem; color: var(--text); font-weight: 600; }
+    .contact-form-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.8rem; }
+    .form-row { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-row label { font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+    .form-row input, .form-row textarea { background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 0.65rem 0.9rem; color: var(--text); font-family: var(--mono); font-size: 0.82rem; outline: none; transition: border-color 0.2s; resize: vertical; }
+    .form-row input:focus, .form-row textarea:focus { border-color: var(--accent); }
+    .form-row textarea { min-height: 100px; }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 2rem; font-family: var(--mono); font-size: 0.66rem; color: var(--text-dim); border-top: 1px solid var(--border); letter-spacing: 0.06em; }
+
+    /* RESPONSIVE */
+    @media (max-width: 760px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      #hero { padding: 7rem 1.5rem 4rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 2.5rem; }
+    }
+  </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="container">
-      <h1>Yusuf Ramazan Tarlabaşı</h1>
-      <p>Yazılım Geliştirici | Teknoloji Aşığı | Problem Çözücü</p>
-    </div>
-  </header>
 
-  <!-- HAKKIMDA -->
-  <section id="about">
-    <div class="container">
-      <h2>Hakkımda</h2>
-      <p>Merhaba, ben Yusuf Ramazan Tarlabaşı. Karabük Mesleki ve Teknik Anadolu Lisesi'nde Bilgisayar Teknolojileri Bölümü son sınıf öğrencisiyim. Karabük Gençlik ve Spor Bakanlığı'nda staj yaparak, gerçek dünyadaki projelerde pratik deneyim kazanıyorum. Teknolojiye olan tutkum, beni çeşitli başarılı projeler geliştirmeye yönlendirdi. Özellikle yazılım geliştirme ve teknoloji inovasyonu alanlarında kendimi sürekli geliştiriyorum. Gelecekte, yazılım ve teknoloji alanında uzmanlaşarak sektöre değer katmayı hedefliyorum.</p>
-      <img src="ben.jpg" alt="Yusuf Ramazan Tarlabaşı" class="profile-img">
-    </div>
-  </section>
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">yrt.dev</span>
+  <ul class="nav-links">
+    <li><a href="#about">Hakkımda</a></li>
+    <li><a href="#experience">Deneyim</a></li>
+    <li><a href="#achievements">Başarılar</a></li>
+    <li><a href="#projects">Projeler</a></li>
+    <li><a href="#skills">Yetenekler</a></li>
+    <li><a href="#contact">İletişim</a></li>
+  </ul>
 
-  <!-- BAŞARILAR -->
-  <section id="achievements">
-    <div class="container">
-      <h2>Başarılarım</h2>
-      <ul>
-        <li><strong>TeknoFest 2024 Finalisti:</strong> Akıllı Baret ve Akıllı Sera projeleriyle finale yükseldik.</li>
-        <li><strong>Akıllı Sera Projesi:</strong> Türkiye 3.'sü olduk (Yardımcı Kaptan).</li>
-        <li><strong>SağlıkFest Finalisti:</strong> Mindeal projemiz ile finalist olduk (Kaptan).</li>
-      </ul>
-    </div>
-  </section>
+</nav>
 
-  <!-- PROJELER -->
-  <section id="projects">
-    <div class="container">
-      <h2>Projelerim</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Akıllı Saksı</h3>
-          <p>IoT teknolojisiyle bitkilerin bakımını kolaylaştıran akıllı bir sistem.</p>
-          <a href="https://github.com/kullanici_adiniz/akilli-saksi" target="_blank">GitHub</a>
-        </div>
-        <div class="project-card">
-          <h3>Akıllı Işık</h3>
-          <p>Uzaktan kontrol edilebilir aydınlatma sistemi.</p>
-          <a href="https://github.com/kullanici_adiniz/akilli-isik" target="_blank">GitHub</a>
-        </div>
-        <div class="project-card">
-          <h3>Mobil Kontrollü Araba</h3>
-          <p>Arduino tabanlı, mobil uygulama üzerinden kontrol edilebilen bir araç.</p>
-          <a href="https://github.com/kullanici_adiniz/mobil-araba" target="_blank">GitHub</a>
-        </div>
-        <div class="project-card">
-          <h3>Kumbara Takip Sistemi</h3>
-          <p>Döviz ve birikimlerinizi takip etmenize yardımcı olan bir uygulama.</p>
-          <a href="https://github.com/kullanici_adiniz/kumbara" target="_blank">GitHub</a>
-        </div>
-        <div class="project-card">
-          <h3>Yapay Zeka ile Stres Ölçümü</h3>
-          <p>Stres seviyesini analiz eden yapay zeka tabanlı bir sistem.</p>
-          <a href="https://github.com/kullanici_adiniz/stres-olcumu" target="_blank">GitHub</a>
+<!-- HERO -->
+<section id="hero" style="border-top:none;">
+  <p class="hero-tag">Mevcut olarak aktif · Karabük, Türkiye</p>
+  <h1>Yusuf Ramazan<br><span>Tarlabşı</span></h1>
+  <p class="hero-role">IoT &amp; Embedded Systems Developer</p>
+  <p class="hero-desc">IoT, gömülü sistemler ve robotik projeler geliştiren teknoloji geliştiricisi. ESP32 ve Arduino tabanlı sistemler üzerine çalışıyorum.</p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary">→ Projelere Bak</a>
+    <a href="#contact" class="btn btn-ghost">İletişime Geç</a>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="padding-top:0; border-top:none; padding-bottom: 0;">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num">8+</div><div class="stat-label">Tamamlanan Proje</div></div>
+    <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Yarışma Başarısı</div></div>
+    <div class="stat-card"><div class="stat-num">12+</div><div class="stat-label">Teknoloji</div></div>
+    <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">GitHub Hesabı</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">01 / Hakkımda</p>
+  <div class="h-line"><h2>Kim Olduğum</h2></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Teknolojiye duyduğum ilgi beni IoT ve gömülü sistemler alanına yöneltti. Gerçek dünya problemlerini çözen, sensörlerden bulutu birbirine bağlayan donanım-yazılım projeleri geliştirmekten keyif alıyorum.</p>
+      <p>Şu an Safranbolu Şefik Dizdar Meslek Yüksekokulu'nda Bilgisayar Teknolojisi eğitimi alırken TEKNOFEST gibi prestijli yarışmalarda projelerimi test etme fırsatı buldum.</p>
+      <p>Akıllı ev sistemleri, tarım teknolojileri ve robotik olmak üzere birçok farklı alanda deneyim kazandım.</p>
+    </div>
+    <div class="about-edu">
+      <div class="edu-item">
+        <p class="edu-year">2024 — Devam Ediyor</p>
+        <p class="edu-school">Safranbolu Şefik Dizdar MYO</p>
+        <p class="edu-dept">Bilgisayar Teknolojisi</p>
+      </div>
+      <div class="edu-item">
+        <p class="edu-year">Mezun</p>
+        <p class="edu-school">Karabük Mesleki ve Teknik Anadolu Lisesi</p>
+        <p class="edu-dept">Teknik Program</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">02 / Deneyim</p>
+  <div class="h-line"><h2>İş Deneyimi</h2></div>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div>
+        <p class="exp-title">Akıllı Ev Sistemleri Kurulum Teknisyeni</p>
+        <p class="exp-company">Serbest / Freelance · 2023 — Devam Ediyor</p>
+        <p class="exp-desc">IoT tabanlı akıllı ev sistemlerinin montajı, kurulumu ve testini gerçekleştirdim. Müşteri evlerinde akıllı aydınlatma, iklim kontrolü, güvenlik kameraları ve uzaktan kontrol sistemleri kurdum. ESP32 ve Arduino tabanlı özel çözümler geliştirerek sistemleri müşteri ihtiyaçlarına göre yapılandırdım.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div>
+        <p class="exp-title">TEKNOFEST Yarışmacı</p>
+        <p class="exp-company">TEKNOFEST · 2023 — 2024</p>
+        <p class="exp-desc">Tarım Teknolojileri kategorisinde Türkiye 3.sü oldum. İnsanlık Yararına Teknoloji kategorisinde Akıllı Baret projesiyle finalist olmaya hak kazandım. Takım çalışması, proje yönetimi ve sunum becerilerimi geliştirdim.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <p class="section-label">03 / Başarılar</p>
+  <div class="h-line"><h2>Yarışmalar</h2></div>
+  <div class="ach-list">
+    <div class="ach-item">
+      <span class="ach-badge badge-gold">Türkiye 3.</span>
+      <div>
+        <p class="ach-title">TEKNOFEST Tarım Teknolojileri Yarışması</p>
+        <p class="ach-sub">Otomatik Sulama &amp; Yemleme Sistemleri — IoT Tabanlı</p>
+      </div>
+    </div>
+    <div class="ach-item">
+      <span class="ach-badge badge-finalist">Finalist</span>
+      <div>
+        <p class="ach-title">TEKNOFEST İnsanlık Yararına Teknoloji</p>
+        <p class="ach-sub">Akıllı Baret Projesi</p>
+      </div>
+    </div>
+    <div class="ach-item">
+      <span class="ach-badge badge-finalist">Finalist</span>
+      <div>
+        <p class="ach-title">SağlıkFest</p>
+        <p class="ach-sub">Stres Analizi Projesi</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">04 / Projeler</p>
+  <div class="h-line"><h2>Neler Yaptım</h2></div>
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">Tümü</button>
+    <button class="filter-btn" data-filter="iot">IoT</button>
+    <button class="filter-btn" data-filter="robotik">Robotik</button>
+    <button class="filter-btn" data-filter="web">Web</button>
+    <button class="filter-btn" data-filter="ai">Yapay Zeka</button>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card" data-cat="iot">
+      <div class="project-thumb thumb-iot">🐔</div>
+      <div class="project-body">
+        <span class="project-cat cat-iot">IoT</span>
+        <p class="project-name">IoT Otomatik Tavuk Yemleme Sistemi</p>
+        <p class="project-desc">ESP32 tabanlı, zamanlayıcı ve uzaktan kontrol destekli otomatik yemleme düzeneği.</p>
+        <div class="project-tags"><span class="tag">ESP32</span><span class="tag">IoT</span><span class="tag">Servo</span><span class="tag">WiFi</span></div>
+        <div class="project-links">
+          <a href="https://github.com/yusuframazan" target="_blank" class="btn btn-ghost btn-sm">⌥ GitHub</a>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- İLETİŞİM -->
-  <section id="contact">
-    <div class="container">
-      <h2>İletişim</h2>
-      <p>Projelerim veya çalışmalarım hakkında bilgi almak isterseniz, aşağıdaki formu doldurabilirsiniz. Size en kısa sürede dönüş yapacağım.</p>
-      <form id="contact-form">
-        <input type="text" name="name" placeholder="Adınız" required>
-        <input type="email" name="email" placeholder="E-posta" required>
-        <textarea name="message" placeholder="Mesajınız" rows="4" required></textarea>
-        <button type="submit">Gönder</button>
-      </form>
+    <div class="project-card" data-cat="iot">
+      <div class="project-thumb thumb-iot">🌱</div>
+      <div class="project-body">
+        <span class="project-cat cat-iot">IoT</span>
+        <p class="project-name">IoT Akıllı Saksı Sistemi</p>
+        <p class="project-desc">Nem sensörü ile toprak durumunu izleyen, otomatik sulama yapan ESP32 projesi.</p>
+        <div class="project-tags"><span class="tag">ESP32</span><span class="tag">Sensör</span><span class="tag">MQTT</span></div>
+        <div class="project-links">
+          <a href="https://github.com/yusuframazan" target="_blank" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2024 Yusuf Ramazan Tarlabaşı. Tüm hakları saklıdır.</p>
-  </footer>
-</body>
-</html>
+    <div class="project-card" data-cat="iot">
+      <div class="project-thumb thumb-iot">🏠</div>
+      <div class="project-body">
+        <span class="project-cat cat-iot">IoT</span>
+        <p class="project-name">Akıllı Oda Otomasyonu</p>
+        <p class="project-desc">Işık, sıcaklık ve priz kontrolünü tek arayüzden yönetebilen otomasyon sistemi.</p>
+        <div class="project-tags"><span class="tag">ESP32</span><span class="tag">Otomasyon</span><span class="tag">Web UI</span></div>
+        <div class="project-links">
+          <a href="https://github.com/yusuframazan" target="_blank" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="iot">
+      <div class="project-thumb thumb-iot">🪪</div>
+      <div class="project-body">
+        <span class="project-cat cat-iot">IoT</span>
+        <p class="project-name">RFID Giriş-Çıkış Takip Sistemi</p>
+        <p class="project-desc">RFID kartlarla personel takibi yapan, kayıtları veritabanında saklayan sistem.</p>
+        <div class="project-tags"><span class="tag">RFID</span><span class="tag">Arduino</span><span class="tag">PHP</span></div>
+        <div class="project-links">
+          <a href="https://github.com/yusuframazan" target="_blank" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="robotik">
+      <div class="project-thumb thumb-robotik">🚗</div>
+      <div class="project-body">
+        <span class="project-cat cat-robotik">Robotik</span>
+        <p class="project-name">Web Kontrollü RC Araç</p>
+        <p class="project-desc">Tarayıcı üzerinden yönlendirilebilen, kamera akışı destekli WiFi kontrollü araç.</p>
+        <div class="project-tags"><span class="tag">ESP32-CAM</span><span class="tag">WebSocket</span><span class="tag">Motor</span></div>
+        <div class="project-links">
+          <a href="https://github.com/yusuframazan" target="_blank" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="robotik">
+      <div class="project-thumb thumb-robotik">🤖</div>
+      <div class="project-body">
+        <span class="project-cat cat-robotik">Robotik</span>
+        <p class="project-name">Görüntü İşleme Destekli Robot Kol</p>
+        <p class="project-desc">Kamera görüntüsünden nesne tanıyarak hedefi otomatik kavrayabilen robot kol.</p>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Servo</span></div>
+        <div class="project-links">
+          <a href="https://github.com/yusuframazan" target="_blank" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="web">
+      <div class="project-thumb thumb-web">🚦</div>
+      <div class="project-body">
+        <span class="project-cat cat-web">Web</span>
+        <p class="project-name">Direksiyon Dersi Randevu Sistemi</p>
+        <p class="project-desc">Sürücü kursu için online randevu alabileceğiniz, ders takibini kolaylaştıran web uygulaması.</p>
+        <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+        <div class="project-links">
+          <a href="https://github.com/yusuf840" target="_blank" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+          <a href="https://yusuf840.github.io/direksiyondersi/" target="_blank" class="btn btn-primary btn-sm">→ Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="ai">
+      <div class="project-thumb thumb-ai">🧠</div>
+      <div class="project-body">
+        <span class="project-cat cat-ai">Yapay Zeka</span>
+        <p class="project-name">Mindeal — Yapay Zeka ile Stres Analizi</p>
+        <p class="project-desc">Girilen metinden duygu durumunu analiz eden, baskın duyguyu ve güven skorunu gösteren AI destekli web aracı.</p>
+        <div class="project-tags"><span class="tag">AI</span><span class="tag">Groq API</span><span class="tag">JavaScript</span></div>
+        <div class="project-links">
+          <a href="https://github.com/yigitemirkalabalik" target="_blank" class="btn btn-ghost btn-sm">⌥ GitHub</a>
+          <a href="https://yigitemirkalabalik.github.io/Mindeal/" target="_blank" class="btn btn-primary btn-sm">→ Demo</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">05 / Yetenekler</p>
+  <div class="h-line"><h2>Teknolojiler</h2></div>
+  <div class="skills-grid">
+    <span class="skill-pill"><span class="dot"></span>ESP32</span>
+    <span class="skill-pill"><span class="dot"></span>Arduino</span>
+    <span class="skill-pill"><span class="dot"></span>Python</span>
+    <span class="skill-pill"><span class="dot"></span>C / C++</span>
+    <span class="skill-pill"><span class="dot"></span>IoT Sistemleri</span>
+    <span class="skill-pill"><span class="dot"></span>Sensör Entegrasyonu</span>
+    <span class="skill-pill"><span class="dot"></span>HTML / CSS</span>
+    <span class="skill-pill"><span class="dot"></span>PHP</span>
+    <span class="skill-pill"><span class="dot"></span>MQTT</span>
+    <span class="skill-pill"><span class="dot"></span>WebSocket</span>
+    <span class="skill-pill"><span class="dot"></span>OpenCV</span>
+    <span class="skill-pill"><span class="dot"></span>RFID</span>
+    <span class="skill-pill"><span class="dot"></span>Akıllı Ev Sistemleri</span>
+    <span class="skill-pill"><span class="dot"></span>JavaScript</span>
+  </div>
+  <div class="github-stats">
+    <div class="contrib-box">
+      <p class="contrib-label">GitHub Katkı Grafiği — yusuframazan</p>
+      <img src="https://ghchart.rshah.org/4ade80/yusuframazan" alt="GitHub katkı grafiği" onerror="this.parentElement.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+  <p class="section-label">06 / Bağlantılar</p>
+  <div class="h-line"><h2>GitHub Hesapları</h2></div>
+  <div class="links-grid">
+    <a class="link-card" href="https://github.com/yusuframazan" target="_blank" rel="noopener">
+      <span class="link-type">GitHub</span>
+      <span class="link-label">yusuframazan</span>
+      <span class="link-url">github.com/yusuframazan</span>
+    </a>
+    <a class="link-card" href="https://github.com/yusuf840" target="_blank" rel="noopener">
+      <span class="link-type">GitHub</span>
+      <span class="link-label">yusuf840</span>
+      <span class="link-url">github.com/yusuf840</span>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">07 / İletişim</p>
+  <div class="h-line"><h2>İletişime Geç</h2></div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p>Yeni bir proje fikrin mi var, işbirliği mi yapmak istiyorsun ya da sadece merhaba mı demek istiyorsun? Her zaman mesaj alabilirim.</p>
+      <div class="contact-items">
+        <a href="/cdn-cgi/l/email-protection#a5dcd0d6d0c3c9cad4929de5c2c8c4ccc98bc6cac8" class="contact-item">
+          <span class="contact-icon">✉</span>
+          <div>
+            <p class="contact-type">Email</p>
+            <p class="contact-val"><span class="__cf_email__" data-cfemail="bac3cfc9cfdcd6d5cb8d82faddd7dbd3d694d9d5d7">[email&#160;protected]</span></p>
+          </div>
+        </a>
+        <a href="https://github.com/yusuframazan" target="_blank" class="contact-item">
+          <span class="contact-icon">⌥</span>
+          <div>
+            <p class="contact-type">GitHub</p>
+            <p class="contact-val">yusuframazan</p>
+          </div>
+        </a>
+        <a href="#" class="contact-item">
+          <span class="contact-icon">in</span>
+          <div>
+            <p class="contact-type">LinkedIn</p>
+            <p class="contact-val">Profil linkini ekle</p>
+          </div>
+        </a>
+        <div class="contact-item" style="cursor:default;">
+          <span class="contact-icon">📍</span>
+          <div>
+            <p class="contact-type">Konum</p>
+            <p class="contact-val">Karabük, Türkiye</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-box">
+      <div class="form-row">
+        <label>İsim</label>
+        <input type="text" placeholder="Adınız Soyadınız">
+      </div>
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" placeholder="ornek@mail.com">
+      </div>
+      <div class="form-row">
+        <label>Mesaj</label>
+        <textarea placeholder="Mesajınız..."></textarea>
+      </div>
+      <a href="/cdn-cgi/l/email-protection#9de4e8eee8fbf1f2ecaaa5ddfaf0fcf4f1b3fef2f0" class="btn btn-primary" style="width:100%;justify-content:center;">✉ Mesaj Gönder</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Yusuf Ramazan Tarlabşı &nbsp;·&nbsp; IoT &amp; Embedded Systems Developer &nbsp;·&nbsp; Karabük, TR</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
